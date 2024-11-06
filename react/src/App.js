@@ -11,7 +11,7 @@ function App() {
   var fetch_single_text = '';
   if(investorName){
     mode = 'single';
-    if(asset){
+    if((asset) && (asset != 'all')){
       fetch_single_text = 'http://127.0.0.1:8000/investor/'+investorName+'/'+asset+'/';
     }
     else{
@@ -32,7 +32,7 @@ function App() {
       .finally(() => {
         setLoading(false);
       });
-  }, [investorName]);
+  }, [investorName, asset]);
 
   return (
     <div className="App">

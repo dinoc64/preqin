@@ -34,10 +34,10 @@ class Investors:
 
     def get_investor(self, investor_name):
         """
-            Get investor record by investor_id from investors table.
+            Get investor record by investor_name from investors table.
             Parameters
             ----------
-            investor_id: it
+            investor_name: str
 
             Returns
             -------
@@ -45,6 +45,31 @@ class Investors:
         """
         # write the SQL query inside the text() block 
         sql = text("SELECT investor_id, investor_name, commitment_asset_class, commitment_currency, commitment_amount from investors WHERE investor_name = '{}'".format(investor_name)) 
+        with self.engine.connect() as conn:
+            results = conn.execute(sql)    
+        
+        # return the record
+        investor = []
+        for record in results:
+            investor.append(record._asdict())
+
+        return(investor)
+
+
+    def get_investor_assets(self, investor_name, asset):
+        """
+            Get investor record by investor_name and asset from investors table.
+            Parameters
+            ----------
+            investor_name: str
+            asset: str
+
+            Returns
+            -------
+            investor: dict
+        """
+        # write the SQL query inside the text() block 
+        sql = text("SELECT investor_id, investor_name, commitment_asset_class, commitment_currency, commitment_amount from investors WHERE investor_name = '{}' and commitment_asset_class = '{}'".format(investor_name, asset)) 
         with self.engine.connect() as conn:
             results = conn.execute(sql)    
         

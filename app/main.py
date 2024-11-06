@@ -19,6 +19,11 @@ async def get_investor(investor_name):
     record = db.get_investor(investor_name)
     return record
 
+@app.get("/investor/{investor_name}/{asset}")
+async def get_investor_assets(investor_name, asset):
+    record = db.get_investor_assets(investor_name, asset)
+    return record
+
 @app.get("/investors")
 async def get_investors():
     records = db.get_investors()
