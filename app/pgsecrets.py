@@ -1,0 +1,1 @@
+pgs = {'user':'postgres', 'pw':'postgres'}
